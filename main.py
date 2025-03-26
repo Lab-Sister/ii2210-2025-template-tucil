@@ -38,7 +38,7 @@ async def get_motd():
 	# Silahkan lengkapi dengan kode untuk memberikan message of the day
 	pass
 
-@app.post("/motd/")
+@app.post("/motd")
 async def post_motd(motd: MOTD, session: SessionDep, credentials: Annotated[HTTPBasicCredentials, Depends(security)]):
 
 	current_password_bytes = credentials.password.encode("utf8")
