@@ -5,7 +5,7 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from sqlmodel import create_engine, Session, SQLModel 
 from typing import Annotated
-from model import MOTD
+from model import MOTD, MOTDBase
 
 # SQLite Database
 sqlite_file_name = "motd.db"
@@ -39,7 +39,7 @@ async def get_motd():
 	pass
 
 @app.post("/motd")
-async def post_motd(motd: MOTD, session: SessionDep, credentials: Annotated[HTTPBasicCredentials, Depends(security)]):
+async def post_motd(message: MOTDBase, session: SessionDep, credentials: Annotated[HTTPBasicCredentials, Depends(security)]):
 
 	current_password_bytes = credentials.password.encode("utf8")
 
